@@ -1,0 +1,143 @@
+---
+title: "Shrimpy data pull"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{python import_data}
+import shrimpy
+
+public_key = '4f5749ef77d1c0578ca83983fe0feafcc34ad368e08e94249f45c812cd96b8fe'
+secret_key = '9cec7edf3b15662ebd565c4f6a236f881280e7329e5d05183b7f204ec35c39c20bcbef9011c471b4b4ec617bdd7f2c125f4991d5fedf56f04cb1e838597976a6'
+client = shrimpy.ShrimpyApiClient(public_key, secret_key)
+
+# binance data
+binance = client.get_ticker('binance')
+# binance US data
+binance_us = client.get_ticker('binanceus')
+# bittrex data
+bittrex = client.get_ticker('bittrex')
+# kucoin data
+kucoin = client.get_ticker('kucoin')
+# coinbase pro data
+coinbasepro = client.get_ticker('coinbasepro')
+# poloniex data
+poloniex = client.get_ticker('poloniex')
+# kraken data
+kraken = client.get_ticker('kraken')
+# bibox data
+bibox = client.get_ticker('bibox')
+# gemini data
+gemini = client.get_ticker('gemini')
+# huobi data
+huobi = client.get_ticker('huobi')
+# huobiglobal data
+huobiglobal = client.get_ticker('huobiglobal')
+# hitbtc data
+hitbtc = client.get_ticker('hitbtc')
+# bitmart data
+bitmart = client.get_ticker('bitmart')
+# bitstamp data
+bitstamp = client.get_ticker('bitstamp')
+# okex data
+okex = client.get_ticker('okex')
+# bitfinex data
+bitfinex = client.get_ticker('bitfinex')
+
+# Add exchange as column name
+import pandas as pd
+# binance
+binance = pd.DataFrame(binance)
+binance = binance.assign(exchange='Binance')
+# binance US
+binance_us = pd.DataFrame(binance_us)
+binance_us = binance_us.assign(exchange='Binance US')
+# bittrex
+bittrex = pd.DataFrame(bittrex)
+bittrex = bittrex.assign(exchange='Bittrex')
+# kucoin
+kucoin = pd.DataFrame(kucoin)
+kucoin = kucoin.assign(exchange='KuCoin')
+# coinbase pro
+coinbasepro = pd.DataFrame(coinbasepro)
+coinbasepro = coinbasepro.assign(exchange='CoinbasePro')
+# poloniex
+poloniex = pd.DataFrame(poloniex)
+poloniex = poloniex.assign(exchange='Poloniex')
+# kraken
+kraken = pd.DataFrame(kraken)
+kraken = kraken.assign(exchange='Kraken')
+# bibox
+bibox = pd.DataFrame(bibox)
+bibox = bibox.assign(exchange='Bibox')
+# gemini
+gemini = pd.DataFrame(gemini)
+gemini = gemini.assign(exchange='Gemini')
+# huobi
+huobi = pd.DataFrame(huobi)
+huobi = huobi.assign(exchange='Huobi')
+# huobi global
+huobiglobal = pd.DataFrame(huobiglobal)
+huobiglobal = huobiglobal.assign(exchange='HuobiGlobal')
+# hitbtc
+hitbtc = pd.DataFrame(hitbtc)
+hitbtc = hitbtc.assign(exchange='HitBTC')
+# bitmart
+bitmart = pd.DataFrame(bitmart)
+bitmart = bitmart.assign(exchange='BitMart')
+# bitstamp
+bitstamp = pd.DataFrame(bitstamp)
+bitstamp = bitstamp.assign(exchange='Bitstamp')
+# okex
+okex = pd.DataFrame(okex)
+okex = okex.assign(exchange='OKEx')
+# bitfinex
+bitfinex = pd.DataFrame(bitfinex)
+bitfinex = bitfinex.assign(exchange='Bitfinex')
+
+# Union all data
+shrimpy_data = pd.concat([binance, binance_us, bittrex, kucoin, coinbasepro, poloniex, kraken, bibox, gemini, huobi, huobiglobal, hitbtc, bitmart, bitstamp, okex, bitfinex])
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE, warning=FALSE}
+library(reticulate)
+library(tidyverse)
+
+# convert to R object/dataframe
+shrimpy_data <- py$shrimpy_data %>% unnest(cols = c(priceUsd, priceBtc, percentChange24hUsd, lastUpdated))
+
+
+# adjust data types
+
+
+
+# connect to ScrapeStorm
+
+
+# write to DB ScrapeStorm
+
+
+# disconnect from ScrapeStorm
+
+
+
+
+# connect to Octoparse
+
+
+# write to DB Octoparse
+
+
+# disconnect from Octoparse
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
